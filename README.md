@@ -69,6 +69,8 @@ NexusEvents is a modern, full-stack web application designed for creating, disco
    From the **root directory** (`d:\MERN`), run:
    ```bash
    npm run dev
+   # OR
+   npm start
    ```
    *This command uses `concurrently` to start both the Backend (Port 5000) and Frontend (Vite) simultaneously.*
 
