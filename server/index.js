@@ -42,6 +42,20 @@ app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/rsvp", rsvpRoutes);
 
+/* Serve Frontend in Production */
+if (process.env.NODE_ENV === "production") {
+    // __dirname is .../server, so we go up one level to find client
+    app.use(express.static(path.join(__dirname, "../client/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../client", "dist", "index.html"));
+    });
+} else {
+    app.get("/", (req, res) => {
+        res.send("API is running...");
+    });
+}
+
 /* 404 Error Handler */
 app.use((req, res, next) => {
     console.log(`404 Not Found: ${req.method} ${req.url}`);
